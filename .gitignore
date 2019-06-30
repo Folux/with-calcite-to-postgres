@@ -1,0 +1,4 @@
+.idea/
+calcite-postgres.iml
+src/main/resources/test/*
+target/

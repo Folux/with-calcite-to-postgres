@@ -20,7 +20,7 @@ object CalciteUtils {
           .unwrap(classOf[CalciteConnection])
       } catch {
         case e: SQLException => {
-          println("Problem when setting up the jdbc connection to you data base. Check the json file for the schema.")
+          println("Problem when setting up the jdbc connection to your data base. Check the json file for the schema.")
           throw  e
         }
       }
