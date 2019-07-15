@@ -7,8 +7,15 @@ import org.apache.calcite.tools.RelBuilder
 object Main {
   def main(args: Array[String]): Unit = {
     // you call this application with the path to the schema json
-    val pathToJson = args(0)
-    val builder = CalciteUtils.getRelBuilder(pathToJson)
+    val pathToJsonCsv = args(0)
+    val pathToJsonPostgres = args(1)
+    val builderCsv = CalciteUtils.getRelBuilder(pathToJsonCsv)
+    val builder = CalciteUtils.getRelBuilder(pathToJsonPostgres)
+
+    val nodeSampleCsv = getNodeFromSampleCsvSchema(builderCsv)
+    println("Sample CSV Relation")
+    println(RelOptUtil.toString(nodeSampleCsv))
+    println()
 
     val nodeTaskOne = getNodeOne(builder)
     println("Relation Task 1")
@@ -139,6 +146,19 @@ object Main {
       .project(builder.field("fullname"))
       .distinct()
       .sortLimit(-1, 5, builder.desc(builder.field("fullname")))
+      .build()
+  }
+
+  def getNodeFromSampleCsvSchema(builder: RelBuilder): RelNode = {
+    builder
+      .scan("food").as("f")
+      .scan("food_de").as("f_de")
+      .join(JoinRelType.INNER, "food_id")
+      .project(
+        builder.field("f", "food_name"),
+        builder.field("f_de", "food_name"),
+        builder.field("f", "food_price")
+      )
       .build()
   }
 }
