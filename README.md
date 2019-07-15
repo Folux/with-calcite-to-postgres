@@ -1,9 +1,14 @@
 # Example Apache Calcite
-Example using Apache Calcite to connect to a local Postgres DB and to create some relational algebra on the `foodmart` sample schema and to execute it.
+Example using Apache Calcite to connect to a local Postgres DB and to create some relational algebra on the `foodmart` sample schema and to execute it. Also a CSV sample schema is provided and with a  relational algebra queried on it.
 
 ## Getting Started
 
-Simplest way to run the code is to get the prepared jar from the `/src/run/` folder, and use the modified version of the schema JSON in the `/src/main/resources/` folder.
+Simplest way to run the code is to get the prepared jar from the `/src/run/` folder.
+The program expects to arguments.
+1. A JSON file pointing to a provided CSV sample schema
+2. A JSON file pointing to your Postgres server 
+
+For the JSON files use the files in the `/src/main/resources/` folder. Modify the template before to connect to your Postgres server-
 
 ### Prerequisites
 
